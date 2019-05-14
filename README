@@ -1,0 +1,68 @@
+------------------------------------------------------------------------------
+ File Monitor plugin for GKrellM
+ Copyright (C) 2001 Anatoly Asviyan
+ aanatoly@linuxmail.org
+
+ This program is free software which I release under the GNU General Public
+ License. You may redistribute and/or modify this program under the terms
+ of that license as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ To get a copy of the GNU General Puplic License,  write to the
+ Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+------------------------------------------------------------------------------
+
+This plugin monitors a file and displays its contens in gkrellm. File can have
+multiple rows of the form 'name : value : [flag]'. If flag non-empty then
+for WARNING value - the orange led will light up and for ALERT value - red.
+For example
+  CPU:50.8:ALERT
+  SBr:33.4:WARNING
+  Fan1:4560:
+or
+  Temp:31 C:
+  Hum:49 %:
+
+Plugin can monitor multiple files and for each file, you can specify
+the following:
+Label           - label of gkrellm panel
+File to monitor - as is :) - file to monitor. It would be checked every 5 sec
+Update program  - the program to update a monitored file.
+Warning command - any shell command to run whenever warning flag is set.
+Alert command   - any shell command to run whenever alert flag is set.
+
+I'm using it to monitor my HW state from via686a sensor chip. For this purpose
+I wrote sensors.tcl script that periodicaly run 'sensors' utility, processes
+its output and writes results to ~/.sensors in the above format. 
+sensors.tcl has its own documentation at the beginning of file.
+Here is sensor's configuration
+label <Sensors>
+file <~/.sensors>
+Update command <sensors.tcl>
+Warning command  <mpg123 ~/mp3/cpu2hot.mp3>
+Alert command  <sudo shutdown -h now>
+
+
+INSTALL 
+tar zxvf fmonitor-xxx.tar.gz
+cd fmonitor-xxx
+# to install fmonitor.so 
+make
+make install
+# to install sensors.tcl 
+0. read documentation
+1. edit it!  
+2. put it somewhere in your bin path
+3. edit preferences of fmonitor in gkrellm configuration menu
+
+
+CREDITS
+Plugin is based on Bill Willson (bill@gkrellm.net) demo programs
+and on fileread plugin by Henry Palonen (h@yty.net)
+Modified for GKrellM 2 by Jindrich Makovicka (makovick@kmlinux.fjfi.cvut.cz).
+Some bugfixes by Geoff Kuenning (geoff@cs.hmc.edu)

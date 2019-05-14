@@ -1,0 +1,21 @@
+/* XPM */
+static char * fm_led_xpm[] = {
+"5 15 3 1",
+" 	c #FFFF00000000",
+".	c #FFFFFFFF0000",
+"X	c None s None",
+" . . ",
+".   .",
+"  .  ",
+".   .",
+" . . ",
+"X.X.X",
+".XXX.",
+"XXXXX",
+".XXX.",
+"X.X.X",
+"XXXXX",
+"XXXXX",
+"XXXXX",
+"XXXXX",
+"XXXXX"};
